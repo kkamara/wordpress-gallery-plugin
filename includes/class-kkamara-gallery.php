@@ -19,6 +19,25 @@ class KKamara_Gallery {
             "add_meta_boxes",
             array($this, "addMetaBox"),
         );
+        // Enqueue scripts.
+        add_action(
+            "admin_enqueue_scripts",
+            array($this, "enqueueScripts"),
+        );
+    }
+
+    /**
+     * Enqueue scripts
+     */
+    public function enqueueScripts($hook) {
+        // Check if post type is kkamara_gallery
+        if ($hook == "post-new.php" || $hook == "post.php") {
+            global $post;
+            if ($post->post_type == "kkamara_gallery") {
+                // Enqueue scripts
+                wp_enqueue_media();
+            }
+        }
     }
 
     /**

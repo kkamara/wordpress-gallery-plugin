@@ -62,7 +62,26 @@ if (!defined("ABSPATH") || !defined("WPINC")) {
         });
         $(".kkamara-add-image").click(function(e) {
             e.preventDefault();
-            console.log("add image");
+            // Loop WP Media
+            var mediaUploader = wp.media({
+                title: "Select Image",
+                button: {
+                    text: "Select Image",
+                },
+                multiple: false,
+            });
+
+            // On Select
+            mediaUploader.on("select", function() {
+                var attachment = mediaUploader.state()
+                    .get("selection")
+                    .first()
+                    .toJSON();
+                // Log
+                console.log(attachment);
+            });
+
+            mediaUploader.open();
         });
     });
 </script>
