@@ -15,6 +15,7 @@ if (!defined("ABSPATH") || !defined("WPINC")) {
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        margin-bottom: 10px;
     }
     .kkamara-gallery-container-body-flex img {
         width: 75px;
@@ -43,23 +44,21 @@ if (!defined("ABSPATH") || !defined("WPINC")) {
         </button>
     </div>
     <!-- Body -->
-    <div class="kkamara-gallery-container-body">
-        <div class="kkamara-gallery-container-body-flex">
-            <img src="https://images.unsplash.com/photo-1724838818103-a3ff16624686?q=80&w=1947&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-            <p class="removeImage">
-                Remove
-            </p>
-        </div>
-    </div>
+    <div class="kkamara-gallery-container-body"></div>
 </div>
 
 <script>
-    jQuery(document).ready(function($) {
-        // Add click event
-        $(".removeImage").click(function(e) {
-            e.preventDefault();
-            console.log("remove image");
+    // Add on-click event
+    const removeImageKKamaraGallery = (elem, e) => {
+        e.preventDefault();
+        jQuery(document).ready(function ($) {
+            var element = $(elem);
+            // Remove the parent element.
+            element.parent().remove();
         });
+    };
+
+    jQuery(document).ready(function($) {
         $(".kkamara-add-image").click(function(e) {
             e.preventDefault();
             // Loop WP Media
@@ -77,6 +76,20 @@ if (!defined("ABSPATH") || !defined("WPINC")) {
                     .get("selection")
                     .first()
                     .toJSON();
+                // Image URL
+                var imageURL = attachment.url;
+                // Append to kkamara-gallery-entry
+                $(".kkamara-gallery-container-body").append(
+                    `
+                        <div class="kkamara-gallery-container-body-flex">
+                            <input type="text" name="kkamaraImages[]" value="${imageURL}" />
+                            <img src="${imageURL}" alt="${attachment.alt}" />
+                            <p class="removeImage" onClick="removeImageKKamaraGallery(this, event)">
+                                Remove
+                            </p>
+                        </div>
+                    `
+                );
                 // Log
                 console.log(attachment);
             });
