@@ -22,6 +22,8 @@ A simple gallery plugin for WordPress.
 
 ## Installation
 
+* [XAMPP](https://www.apachefriends.org/download.html) (During installation choose MySQL & php).
+
 ## Usage
 
 ## API Documentation
