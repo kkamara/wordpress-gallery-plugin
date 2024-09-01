@@ -49,16 +49,49 @@ class KKamara_Gallery {
     public function enqueueScriptsFrontend() {
         // CSS for lightgallery
         wp_enqueue_style(
-            "kkamara-gallery-lightgallery",
-            KKAMARA_GALLERY_URL . "/assets/css/light-gallery.css",
+            "kkamara-gallery-lightgallery-core",
+            KKAMARA_GALLERY_URL . "/assets/css/lightgallery-core.css",
             [],
             KKAMARA_GALLERY_VERSION,
             "all",
         );
+
+        wp_enqueue_style(
+            "kkamara-gallery-lightgallery",
+            KKAMARA_GALLERY_URL . "/assets/css/lightgallery.css",
+            [],
+            KKAMARA_GALLERY_VERSION,
+            "all",
+        );
+
+        wp_enqueue_style(
+            "kkamara-gallery-lightgallery-lg-thumbnail",
+            KKAMARA_GALLERY_URL . "/assets/css/lg-thumbnail.css",
+            [],
+            KKAMARA_GALLERY_VERSION,
+            "all",
+        );
+        
         // JS for lightgallery
         wp_enqueue_script(
             "kkamara-gallery-lightgallery",
-            KKAMARA_GALLERY_URL . "/assets/js/light-gallery.js",
+            KKAMARA_GALLERY_URL . "/assets/lightgallery.min.js",
+            ["jquery"],
+            KKAMARA_GALLERY_VERSION,
+            true,
+        );
+        // Thumbnail plugin
+        wp_enqueue_script(
+            "kkamara-gallery-thumbnail",
+            KKAMARA_GALLERY_URL . "/assets/plugins/thumbnail/lg-thumbnail.min.js",
+            ["jquery"],
+            KKAMARA_GALLERY_VERSION,
+            true,
+        );
+        // Add kkamara-core.js
+        wp_enqueue_script(
+            "kkamara-core",
+            KKAMARA_GALLERY_URL . "/assets/js/kkamara-core.js",
             ["jquery"],
             KKAMARA_GALLERY_VERSION,
             true,
@@ -74,9 +107,28 @@ class KKamara_Gallery {
             "title" => "KKamara Gallery",
             "id" => 200,
         ], $atts, "kkamara_gallery");
+        // Get images post meta
+        $kkamaraImages = get_post_meta(
+            $shortCodeAtt["id"],
+            "kkamaraImages",
+            true,
+        );
+        // Check if it's empty
+        if (empty($kkamaraImages)) {
+            return false;
+        }
+        // Decode the $kkamaraImages
+        $kkamaraImages = json_decode($kkamaraImages);
+        // Title
+        $title = $shortCodeAtt["title"];
+        // Start buffering
+        ob_start();
+        // Include the template
+        include_once KKAMARA_GALLERY_DIR . "/templates/shortcode-frontend.php";
+        // Get the content
+        $content = ob_get_clean();
         // Return content
-        return "Hello " . $shortCodeAtt["title"] .
-            " " . $shortCodeAtt["id"];
+        return $content;
     }
 
     /**
