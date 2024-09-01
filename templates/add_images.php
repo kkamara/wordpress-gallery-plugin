@@ -54,20 +54,23 @@ if (!defined("ABSPATH") || !defined("WPINC")) {
             );
             // Decode data
             $kkamaraImages = json_decode($kkamaraImages);
-            // Loop through
-            foreach(
-                $kkamaraImages as $kkamaraImage
-            ):
-            ?>
-                <div class="kkamara-gallery-container-body-flex">
-                    <input type="hidden" name="kkamaraImages[]" value="<?php echo $kkamaraImage; ?>" />
-                    <img src="<?php echo $kkamaraImage; ?>" alt="" />
-                    <p class="removeImage" onClick="removeImageKKamaraGallery(this, event)">
-                        Remove
-                    </p>
-                </div>
-            <?php
-            endforeach;
+
+            if ($kkamaraImages) {
+                // Loop through
+                foreach(
+                    $kkamaraImages as $kkamaraImage
+                ):
+                ?>
+                    <div class="kkamara-gallery-container-body-flex">
+                        <input type="hidden" name="kkamaraImages[]" value="<?php echo $kkamaraImage; ?>" />
+                        <img src="<?php echo $kkamaraImage; ?>" alt="" />
+                        <p class="removeImage" onClick="removeImageKKamaraGallery(this, event)">
+                            Remove
+                        </p>
+                    </div>
+                <?php
+                endforeach;
+            }
         ?>
     </div>
 </div>
