@@ -31,6 +31,25 @@ class KKamara_Gallery {
             10,
             2,
         );
+        // Add shortcode
+        add_shortcode(
+            "kkamara_gallery",
+            array($this, "shortcode"),
+        );
+    }
+
+    /**
+     * Shortcode callback
+     */
+    public function shortcode($atts) {
+        // Get the shortcode attributes
+        $shortCodeAtt = shortcode_atts([
+            "title" => "KKamara Gallery",
+            "id" => 200,
+        ], $atts, "kkamara_gallery");
+        // Return content
+        return "Hello " . $shortCodeAtt["title"] .
+            " " . $shortCodeAtt["id"];
     }
 
     /**
@@ -100,6 +119,26 @@ class KKamara_Gallery {
             "normal",
             "high",
         );
+
+        // Add short code
+        add_meta_box(
+            "kkamara_gallery_shortcode_meta_box",
+            "Shortcode",
+            array($this, "renderShortcodeMetaBox"),
+            "kkamara_gallery",
+            "side",
+        );
+    }
+
+    /**
+     * renderShortcodeMetaBox
+     */
+    public function renderShortcodeMetaBox($post) {
+        ob_start();
+        include_once KKAMARA_GALLERY_DIR .
+            "/templates/shortcode.php";
+        $output = ob_get_clean();
+        echo $output;
     }
 
     /**
