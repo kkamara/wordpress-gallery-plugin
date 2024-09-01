@@ -82,7 +82,7 @@ if (!defined("ABSPATH") || !defined("WPINC")) {
                 $(".kkamara-gallery-container-body").append(
                     `
                         <div class="kkamara-gallery-container-body-flex">
-                            <input type="text" name="kkamaraImages[]" value="${imageURL}" />
+                            <input type="hidden" name="kkamaraImages[]" value="${imageURL}" />
                             <img src="${imageURL}" alt="${attachment.alt}" />
                             <p class="removeImage" onClick="removeImageKKamaraGallery(this, event)">
                                 Remove
