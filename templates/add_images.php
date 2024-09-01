@@ -44,7 +44,32 @@ if (!defined("ABSPATH") || !defined("WPINC")) {
         </button>
     </div>
     <!-- Body -->
-    <div class="kkamara-gallery-container-body"></div>
+    <div class="kkamara-gallery-container-body">
+        <?php
+            // Get kkamaraImages
+            $kkamaraImages = get_post_meta(
+                $post->ID,
+                "kkamaraImages",
+                true,
+            );
+            // Decode data
+            $kkamaraImages = json_decode($kkamaraImages);
+            // Loop through
+            foreach(
+                $kkamaraImages as $kkamaraImage
+            ):
+            ?>
+                <div class="kkamara-gallery-container-body-flex">
+                    <input type="hidden" name="kkamaraImages[]" value="<?php echo $kkamaraImage; ?>" />
+                    <img src="<?php echo $kkamaraImage; ?>" alt="" />
+                    <p class="removeImage" onClick="removeImageKKamaraGallery(this, event)">
+                        Remove
+                    </p>
+                </div>
+            <?php
+            endforeach;
+        ?>
+    </div>
 </div>
 
 <script>
