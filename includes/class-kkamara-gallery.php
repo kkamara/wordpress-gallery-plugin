@@ -36,6 +36,33 @@ class KKamara_Gallery {
             "kkamara_gallery",
             array($this, "shortcode"),
         );
+        // Enqueue scripts to frontend
+        add_action(
+            "wp_enqueue_scripts",
+            array($this, "enqueueScriptsFrontend"),
+        );
+    }
+
+    /**
+     * enqueueScriptsFrontend
+     */
+    public function enqueueScriptsFrontend() {
+        // CSS for lightgallery
+        wp_enqueue_style(
+            "kkamara-gallery-lightgallery",
+            KKAMARA_GALLERY_URL . "/assets/css/light-gallery.css",
+            [],
+            KKAMARA_GALLERY_VERSION,
+            "all",
+        );
+        // JS for lightgallery
+        wp_enqueue_script(
+            "kkamara-gallery-lightgallery",
+            KKAMARA_GALLERY_URL . "/assets/js/light-gallery.js",
+            ["jquery"],
+            KKAMARA_GALLERY_VERSION,
+            true,
+        );
     }
 
     /**
