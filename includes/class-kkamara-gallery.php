@@ -24,6 +24,41 @@ class KKamara_Gallery {
             "admin_enqueue_scripts",
             array($this, "enqueueScripts"),
         );
+        // Save post hook.
+        add_action(
+            "save_post",
+            array($this, "savePost"),
+            10,
+            2,
+        );
+    }
+
+    /**
+     * Save post
+     */
+    public function savePost($post_id, $post) {
+        // Log
+        // file_put_contents(
+        //     __DIR__ . "/log.log",
+        //     json_encode($post),
+        // );
+        // Check if post type is kkamara_gallery
+        if ($post->post_type !== "kkamara_gallery") {
+            return false;
+        }
+
+        // Get all input data.
+        $kkamaraImages = $_POST["kkamaraImages"];
+        
+        // Check if it's empty
+        if (empty($kkamaraImages)) {
+            return false;
+        }
+        // Log
+        // file_put_contents(
+        //     __DIR__ . "/log.log",
+        //     json_encode($kkamaraImages),
+        // );
     }
 
     /**
