@@ -41,6 +41,50 @@ class KKamara_Gallery {
             "wp_enqueue_scripts",
             array($this, "enqueueScriptsFrontend"),
         );
+        // Add column on kkamara gallery post type
+        add_filter(
+            "manage_kkamara_gallery_posts_columns",
+            array($this, "addColumns"),
+        );
+        // Add column content on kkamara_gallery post type
+        add_action(
+            "manage_kkamara_gallery_posts_custom_column",
+            array($this, "addColumnsContent"),
+            10,
+            2,
+        );
+    }
+
+    /**
+     * addColumnsContent
+     */
+    public function addColumnsContent($column, $post_id) {
+        switch($column) {
+            case "shortcode":
+                echo '[kkamara_gallery id="' . 
+                    $post_id . '"] title="' . 
+                    get_the_title($post_id) . '"]';
+                break;
+            case "author":
+                echo get_the_author_meta(
+                    "display_name",
+                    get_post_field("post_author", $post_id),
+                );
+                break;
+        }
+    }
+
+    /**
+     * addColumns
+     */
+    public function addColumns($columns) {
+        // Unset date
+        unset($columns["date"]);
+        $columns["shortcode"] = "Shortcode";
+        // Add author
+        $columns["author"] = "Author";
+        $columns["date"] = "Date";
+        return $columns;
     }
 
     /**
