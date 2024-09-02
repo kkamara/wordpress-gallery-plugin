@@ -284,7 +284,7 @@ class KKamara_Gallery {
             "labels" => [
                 "name" => "Gallery",
                 "singular_name" => "Gallery",
-                "menu_name" => "Gallery",
+                "menu_name" => "KKamara Gallery",
                 "name_admin_bar" => "Gallery",
                 "add_new" => "Add New Gallery",
                 "add_new_item" => "Add New Gallery",
