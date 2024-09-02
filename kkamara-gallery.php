@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KKamara Gallery
  * Plugin URI:  https://github.com/kkamara/wordpress-gallery-plugin
- * Author:      KKamara
+ * Author:      Kelvin Kamara
  * Author URI:  https://kelvinkamara.com
  * Description: A simple gallery plugin for WordPress.
  * Version:     0.1.0
