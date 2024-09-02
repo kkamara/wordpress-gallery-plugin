@@ -17,7 +17,7 @@ if (!defined("ABSPATH") || !defined("WPINC")) {
 }
 
 // Define plugin constants.
-define("KKAMARA_GALLERY_VERSION", time());
+define("KKAMARA_GALLERY_VERSION", "0.1.0");
 // Plugin file.
 define("KKAMARA_GALLERY_FILE", __FILE__);
 // Plugin directory.
