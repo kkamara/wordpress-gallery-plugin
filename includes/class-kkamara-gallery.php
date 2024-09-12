@@ -185,7 +185,10 @@ class KKamara_Gallery {
         //     json_encode($post),
         // );
         // Check if post type is kkamara_gallery
-        if ($post->post_type !== "kkamara_gallery") {
+        if (
+            $post->post_type !== "kkamara_gallery" ||
+            !isset($_POST["kkamaraImages"])
+        ) {
             return false;
         }
 
