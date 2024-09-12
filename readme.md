@@ -24,7 +24,7 @@ A simple gallery plugin for WordPress.
 
 * PHP
 
-* MySQL
+* MySQL or MariaDB
 
 * NginX or Apache.
 
